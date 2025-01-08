@@ -1,0 +1,33 @@
+const String baseUrl = 'https://elwekala.onrender.com';
+class ApiConstants {
+  static const loginApi = '$baseUrl/user/login';
+  static const registerApi = '$baseUrl/user/register';
+  static const forgetPasswordApi = '$baseUrl/user/forget-password';
+  static const profileApi = '$baseUrl/user/profile';
+  static const editProfile = '$baseUrl/user/update';
+  static const getUsersApi = '$baseUrl/user/display';
+  static const deleteUserApi = '$baseUrl/user/delete';
+  static const chatApi = '$baseUrl/chat/';
+  static const homeLaptopApi = '$baseUrl/product/inCart/Laptops';
+  static const homeSmartPhoneApi = '$baseUrl/product/inCart/Smart Phones';
+  static const homeSmartWatchApi = '$baseUrl/product/inCart/Smart Watches';
+  static const topSellerApi = '$baseUrl/product/get/top-sellers';
+  static const homeSmartTvsApi = '$baseUrl/product/inCart/Smart TVs';
+  static const homeAccApi = '$baseUrl/product/inCart/PC and laptop accessories';
+  static const favoriteApi = '$baseUrl/favorite';
+  static const sellerApi = '$baseUrl/product';
+  static const addToCartApi = 'https://elwekala.onrender.com/cart/add';
+  static const geyMyCartApi = 'https://elwekala.onrender.com/cart/allProducts';
+  static const getTotalPriceApi = 'https://elwekala.onrender.com/cart/total';
+  static const addProductApi = '$baseUrl/product/add';
+  static const deleteCartApi = 'https://elwekala.onrender.com/cart/delete';
+  static const updateQuantityApi = 'https://elwekala.onrender.com/cart';
+  static const logoutApi= 'https://elwekala.onrender.com/user/logout';
+  static const deleteReviewApi='https://elwekala.onrender.com/review';
+  static const addReviewApi = 'https://elwekala.onrender.com/review';
+  static const getAllReviewApi = 'https://elwekala.onrender.com/review/allreviews';
+ static const  searchApi='https://elwekala.onrender.com/product/get/search';
+ static const getAllProductsApi= 'https://elwekala.onrender.com/product/get/search';
+ static const sendContactApi = '$baseUrl/report';
+ static const companyProductsSales = '$baseUrl/product/get/sorted-products';
+}

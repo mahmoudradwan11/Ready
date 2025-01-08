@@ -12,4 +12,5 @@ class AppFontSize {
   static const double fontSize35 = 35.0;
 }
 String ? nextScreen;
+var board;
 

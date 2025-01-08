@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ready/screens/screens/home.dart';
 import 'package:ready/screens/screens/onboading.dart';
 import 'package:ready/screens/screens/splash.dart';
 class Routes
@@ -19,7 +20,9 @@ class RouteGenerator{
         return MaterialPageRoute(builder:(_)=>SplashScreen());
       case Routes.onBoardingRoute:
         return MaterialPageRoute(builder:(_)=>OnBoardingScreen());
-      case Routes.onBoardingRoute:
+      case Routes.userHomeRoute:
+        return MaterialPageRoute(builder:(_)=>HomeScreen());
+
       default:
         return unDefinedRoute();
     }
