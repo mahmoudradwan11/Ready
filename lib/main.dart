@@ -20,7 +20,7 @@ void main()async{
     statusBarIconBrightness: Brightness.light,
   ));
   if(board!=null) {
-    nextScreen = Routes.userHomeRoute;
+    nextScreen = Routes.startRoute;
   }else{
     nextScreen = Routes.onBoardingRoute;
   }

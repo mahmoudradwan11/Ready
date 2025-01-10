@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:ready/screens/screens/home.dart';
 import 'package:ready/screens/screens/onboading.dart';
 import 'package:ready/screens/screens/splash.dart';
+import 'package:ready/screens/screens/start.dart';
 class Routes
 {
   static const String splashRoute = '/';
-  static const String userHomeRoute = '/userHome';
-  static const String adminHomeRoute = '/adminHome';
+  static const String startRoute = '/start';
   static const String loginRoute = '/login';
   static const String registerRoute = '/register';
   static const String forgotPasswordRoute = '/forgotPassword';
@@ -20,7 +20,9 @@ class RouteGenerator{
         return MaterialPageRoute(builder:(_)=>SplashScreen());
       case Routes.onBoardingRoute:
         return MaterialPageRoute(builder:(_)=>OnBoardingScreen());
-      case Routes.userHomeRoute:
+      case Routes.startRoute:
+        return MaterialPageRoute(builder:(_)=>StartScreen());
+      case Routes.home:
         return MaterialPageRoute(builder:(_)=>HomeScreen());
 
       default:
