@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:ready/core/mangers/routes.dart';
 import 'package:ready/core/mangers/values.dart';
 import 'package:ready/screens/widgets/button.dart';
 
@@ -45,7 +46,9 @@ class StartScreen extends StatelessWidget {
                   isUpperCase: true,
                   width: double.infinity,
                     buttonWidget:Text('LOGIN',style: TextStyle(color: Colors.white),),
-                    function:(){},
+                    function:(){
+                    navigateAndReplace(context,Routes.loginRoute);
+                    },
                     backgroundColor: HexColor('8875FF'),
                 ),
               ),

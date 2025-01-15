@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ready/core/controllers/login_cubit/login_cubit.dart';
+import 'package:ready/core/controllers/obs.dart';
 import 'package:ready/core/mangers/routes.dart';
 import 'package:ready/core/mangers/themes.dart';
 import 'package:ready/core/mangers/values.dart';
@@ -13,6 +15,7 @@ void main()async{
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
   await DioHelper.init();
+  Bloc.observer = MyBlocObserver();
   board = CacheHelper.getData(key: 'onBoarding');
   print('Boarding =$board');
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -35,11 +38,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
           providers: [
-          BlocProvider(
+            BlocProvider(
           create: (context) => OnboardingCubit(),
     lazy: true,
     ),
-    ],
+            BlocProvider(
+              create: (context) => LoginCubit()..checkLoginBotton(),
+              lazy: true,
+            ),
+
+          ],
       child:MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Ready',

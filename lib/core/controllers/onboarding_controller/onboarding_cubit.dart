@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ready/core/mangers/routes.dart';
 import 'package:ready/core/network/local/cache_helper.dart';
 import 'package:ready/screens/screens/home.dart';
+import 'package:ready/screens/screens/start.dart';
 
 import 'onboarding_states.dart';
 
@@ -29,7 +30,7 @@ class OnboardingCubit extends Cubit<OnBoardingStates> {
   void submit(context) {
     CacheHelper.saveData(key: 'onBoarding', value: true).then((value) {
       if (value) {
-        navigateAndFinishThisScreen(context, const HomeScreen());
+        navigateAndFinishThisScreen(context, const StartScreen());
       }
     });
   }
