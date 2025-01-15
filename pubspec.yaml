@@ -38,6 +38,7 @@ dependencies:
   shared_preferences:
   dio:
   smooth_page_indicator:
+  loading_animation_widget:
   fluttertoast:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
