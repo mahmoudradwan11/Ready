@@ -1,15 +1,15 @@
-class UserModel{
+class UserModel {
   String? status;
   String? message;
   UserData? user;
   UserModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    user = json['user'] != null ?  UserData.fromJson(json['user']) : null;
+    user = json['user'] != null ? UserData.fromJson(json['user']) : null;
   }
 }
 
-class UserData{
+class UserData {
   String? name;
   String? email;
   String? phone;

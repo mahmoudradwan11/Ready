@@ -3,15 +3,16 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ready/core/controllers/login_cubit/login_cubit.dart';
 import 'package:ready/core/controllers/obs.dart';
+import 'package:ready/core/controllers/register_cubit/register_cubit.dart';
 import 'package:ready/core/mangers/routes.dart';
 import 'package:ready/core/mangers/themes.dart';
 import 'package:ready/core/mangers/values.dart';
 import 'package:ready/screens/screens/splash.dart';
 import 'core/controllers/onboarding_controller/onboarding_cubit.dart';
 import 'core/network/local/cache_helper.dart';
-import 'core/network/remote/store/dio_helper.dart';
+import 'core/network/remote/dio_helper.dart';
 
-void main()async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
   await DioHelper.init();
@@ -22,9 +23,9 @@ void main()async{
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.light,
   ));
-  if(board!=null) {
+  if (board != null) {
     nextScreen = Routes.startRoute;
-  }else{
+  } else {
     nextScreen = Routes.onBoardingRoute;
   }
   runApp(const MyApp());
@@ -37,18 +38,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-          providers: [
-            BlocProvider(
+      providers: [
+        BlocProvider(
           create: (context) => OnboardingCubit(),
-    lazy: true,
-    ),
-            BlocProvider(
-              create: (context) => LoginCubit()..checkLoginBotton(),
-              lazy: true,
-            ),
-
-          ],
-      child:MaterialApp(
+          lazy: true,
+        ),
+        BlocProvider(
+          create: (context) => LoginCubit()..checkLoginBotton(),
+          lazy: true,
+        ),
+        BlocProvider(
+          create: (context) => RegisterCubit()..checkRegisterBotton(),
+          lazy: true,
+        ),
+      ],
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Ready',
         initialRoute: Routes.splashRoute,
@@ -59,4 +63,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

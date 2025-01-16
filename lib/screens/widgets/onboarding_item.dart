@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ready/core/mangers/values.dart';
-import 'package:ready/models/OnBoardingModel.dart';
+import 'package:ready/core/models/OnBoardingModel.dart';
 import 'package:svg_flutter/svg.dart';
 
 Widget buildOnBoardingItem(OnBoardingModel model) => Column(

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:ready/screens/screens/home.dart';
 import 'package:ready/screens/screens/login.dart';
 import 'package:ready/screens/screens/onboading.dart';
+import 'package:ready/screens/screens/reqister.dart';
 import 'package:ready/screens/screens/splash.dart';
 import 'package:ready/screens/screens/start.dart';
-class Routes
-{
+
+class Routes {
   static const String splashRoute = '/';
   static const String startRoute = '/start';
   static const String loginRoute = '/login';
@@ -14,33 +15,41 @@ class Routes
   static const String home = '/home';
   static const String onBoardingRoute = '/onBoarding';
 }
-class RouteGenerator{
-  static Route<dynamic> getRoutes(RouteSettings settings){
-    switch(settings.name){
+
+class RouteGenerator {
+  static Route<dynamic> getRoutes(RouteSettings settings) {
+    switch (settings.name) {
       case Routes.splashRoute:
-        return MaterialPageRoute(builder:(_)=>SplashScreen());
+        return MaterialPageRoute(builder: (_) => SplashScreen());
       case Routes.loginRoute:
-        return MaterialPageRoute(builder:(_)=>LoginScreen());
+        return MaterialPageRoute(builder: (_) => LoginScreen());
       case Routes.onBoardingRoute:
-        return MaterialPageRoute(builder:(_)=>OnBoardingScreen());
+        return MaterialPageRoute(builder: (_) => OnBoardingScreen());
       case Routes.startRoute:
-        return MaterialPageRoute(builder:(_)=>StartScreen());
+        return MaterialPageRoute(builder: (_) => StartScreen());
+      case Routes.registerRoute:
+        return MaterialPageRoute(builder: (_) => RegisterScreen());
       case Routes.home:
-        return MaterialPageRoute(builder:(_)=>HomeScreen());
+        return MaterialPageRoute(builder: (_) => HomeScreen());
 
       default:
         return unDefinedRoute();
     }
   }
-  static Route<dynamic> unDefinedRoute(){
-    return MaterialPageRoute(builder:(_)=>Scaffold(
-      appBar: AppBar(
-        title:const Text('NotFound'),
-      ),
-      body:const Center(child: Text('No Page'),),
-    ));
+
+  static Route<dynamic> unDefinedRoute() {
+    return MaterialPageRoute(
+        builder: (_) => Scaffold(
+              appBar: AppBar(
+                title: const Text('NotFound'),
+              ),
+              body: const Center(
+                child: Text('No Page'),
+              ),
+            ));
   }
 }
+
 void navigateToNextScreen(context, widget) =>
     Navigator.of(context).push(SliderRight(page: widget));
 
@@ -58,13 +67,15 @@ class SliderRight extends PageRouteBuilder {
   SliderRight({required this.page})
       : super(
             pageBuilder: (context, animation, animationTwo) => page,
-            transitionsBuilder: (context, animation, animationTwo, child){
+            transitionsBuilder: (context, animation, animationTwo, child) {
               var begin = 0.0;
               var end = 1.0;
-              var tween =Tween(begin: begin,end: end);
-              var curvesAnimated = CurvedAnimation(parent: animation, curve: Curves.linear);
-              return RotationTransition(turns: tween.animate(curvesAnimated),child: child,);
-            }
-  );
+              var tween = Tween(begin: begin, end: end);
+              var curvesAnimated =
+                  CurvedAnimation(parent: animation, curve: Curves.linear);
+              return RotationTransition(
+                turns: tween.animate(curvesAnimated),
+                child: child,
+              );
+            });
 }
-

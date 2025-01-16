@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:ready/core/controllers/onboarding_controller/onboarding_cubit.dart';
 import 'package:ready/core/controllers/onboarding_controller/onboarding_states.dart';
+import 'package:ready/core/mangers/colors.dart';
 import 'package:ready/core/mangers/lists.dart';
 import 'package:ready/core/mangers/values.dart';
 import 'package:ready/screens/widgets/button.dart';
@@ -19,16 +19,16 @@ class OnBoardingScreen extends StatelessWidget {
           var boardController = PageController();
           var cubit = OnboardingCubit.get(context);
           return Scaffold(
-            backgroundColor: Colors.black,
+            backgroundColor: AppColors.defaultColor,
             appBar: AppBar(
-                backgroundColor: Colors.black,
+                backgroundColor: AppColors.defaultColor,
                 title: TextButton(
                     onPressed: () {
                       cubit.submit(context);
                     },
                     child: Text(
                       'SKIP',
-                      style: TextStyle(color: Colors.grey),
+                      style: TextStyle(color: AppColors.greyColor),
                     ))),
             body: Padding(
               padding: const EdgeInsets.only(top: 50),
@@ -60,7 +60,7 @@ class OnBoardingScreen extends StatelessWidget {
                   SmoothPageIndicator(
                       effect: ExpandingDotsEffect(
                         dotColor: Colors.grey[300]!,
-                        activeDotColor: Colors.white,
+                        activeDotColor: AppColors.whiteColor,
                         dotHeight: 10,
                         dotWidth: 10,
                         expansionFactor: 3,
@@ -110,21 +110,23 @@ class OnBoardingScreen extends StatelessWidget {
                                       : Colors.grey),
                             )),
                         DefaultButton(
-                          backgroundColor: HexColor('8875FF'),
+                          backgroundColor: AppColors.thirdColor,
                           buttonWidget: cubit.screenIndex == 2
                               ? Text(
                                   'GET STARTED',
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(color: AppColors.whiteColor),
                                 )
                               : Text('NEXT',
-                                  style: TextStyle(color: Colors.white)),
-                          function: (){
-                            cubit.screenIndex == 2?
-                                cubit.submit(context):boardController.nextPage(
-                                duration: const Duration(
-                                  milliseconds: 750,
-                                ),
-                                curve: Curves.fastLinearToSlowEaseIn);
+                                  style:
+                                      TextStyle(color: AppColors.whiteColor)),
+                          function: () {
+                            cubit.screenIndex == 2
+                                ? cubit.submit(context)
+                                : boardController.nextPage(
+                                    duration: const Duration(
+                                      milliseconds: 750,
+                                    ),
+                                    curve: Curves.fastLinearToSlowEaseIn);
                           },
                         )
                       ],

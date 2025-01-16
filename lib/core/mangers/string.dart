@@ -1,5 +1,12 @@
 class AppString {
-  static const String forecast = 'Weather Forecast';
-  static const String search = 'Search City';
-  static const String pray = 'Pray Time in The City';
+  static const String loginMassage = 'User logged in successfully';
+  static const String loginScreenRedirect = 'User logged in successfully';
+  static const String loginTitle = 'Why don\'t we continue what we started?';
+  static const String login = 'Login';
+  static const String register = 'Register';
+  static const String google = 'Login with Google';
+  static const String apple = 'Login with Apple';
+  static const String startTitle = 'Welcome to UpTodo';
+  static const String start = 'Please login to your account or create new account to continue';
+
 }

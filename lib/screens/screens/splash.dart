@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:ready/core/mangers/colors.dart';
 import 'package:ready/core/mangers/images_manger.dart';
 import 'package:ready/core/mangers/routes.dart';
 import 'package:ready/core/mangers/values.dart';
@@ -28,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-         backgroundColor: Colors.black,
+         backgroundColor:AppColors.defaultColor,
         body: SizedBox(
           height: double.infinity,
           width: double.infinity,

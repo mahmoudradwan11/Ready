@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:ready/core/mangers/values.dart';
 import 'colors.dart';
 
 ThemeData lightTheme = ThemeData(
   useMaterial3: false,
   appBarTheme: AppBarTheme(
     titleSpacing: 20.0,
-    backgroundColor: Colors.white,
+    backgroundColor: AppColors.whiteColor,
     elevation: 0.0,
     titleTextStyle: TextStyle(
-      color: AppColors.blackColor,
+      color: AppColors.defaultColor,
       fontSize: 20.0,
-      fontWeight: FontWeight.w500,
+      fontWeight: AppFontWeight.font500,
     ),
     iconTheme: IconThemeData(
-      color: AppColors.blackColor,
+      color: AppColors.defaultColor,
     ),
   ),
   floatingActionButtonTheme: FloatingActionButtonThemeData(
@@ -21,7 +22,7 @@ ThemeData lightTheme = ThemeData(
   ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     type: BottomNavigationBarType.fixed,
-    selectedItemColor: AppColors.blackColor,
+    selectedItemColor: AppColors.defaultColor,
     elevation: 20.0,
     backgroundColor: AppColors.defaultColor,
   ),
