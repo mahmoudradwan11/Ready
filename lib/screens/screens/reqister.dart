@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:ready/core/controllers/login_cubit/login_states.dart';
 import 'package:ready/core/controllers/register_cubit/register_cubit.dart';
 import 'package:ready/core/controllers/register_cubit/register_states.dart';
+import 'package:ready/core/mangers/colors.dart';
 import 'package:ready/core/mangers/images_manger.dart';
 import 'package:ready/core/mangers/reg_exp.dart';
+import 'package:ready/core/mangers/routes.dart';
+import 'package:ready/core/mangers/string.dart';
 import 'package:ready/core/mangers/values.dart';
 import 'package:ready/core/network/local/cache_helper.dart';
 import 'package:ready/screens/widgets/button.dart';
@@ -45,7 +46,7 @@ class RegisterScreen extends StatelessWidget {
     }, builder: (context, state) {
       var cubit = RegisterCubit.get(context);
       return Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: AppColors.defaultColor,
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(top: 122, left: 20, right: 20),
@@ -62,8 +63,8 @@ class RegisterScreen extends StatelessWidget {
                             Text(
                               'Register',
                               style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
+                                color:AppColors.whiteColor,
+                                fontWeight: AppFontWeight.font600,
                                 fontSize: AppFontSize.fontSize40,
                                 fontFamily: 'Lato',
                               ),
@@ -72,10 +73,10 @@ class RegisterScreen extends StatelessWidget {
                               height: 5,
                             ),
                             Text(
-                              'Les\'s Start Our Future',
+                              'Let\'s Start Our Future',
                               style: TextStyle(
-                                color: Colors.grey,
-                                fontWeight: FontWeight.w200,
+                                color: AppColors.greyColor,
+                                fontWeight:AppFontWeight.font200,
                                 fontSize: AppFontSize.fontSize20,
                                 fontFamily: 'Lato',
                               ),
@@ -125,7 +126,7 @@ class RegisterScreen extends StatelessWidget {
                     Text(
                       'Name',
                       style: TextStyle(
-                          color: Colors.white,
+                          color: AppColors.whiteColor,
                           fontSize: AppFontSize.fontSize16),
                     ),
                     SizedBox(height: 5),
@@ -135,13 +136,13 @@ class RegisterScreen extends StatelessWidget {
                       keyboard: TextInputType.text,
                       valid: (value) {},
                       hint: 'Enter your Name',
-                      hintStyle: TextStyle(color: HexColor('535353')),
+                      hintStyle: TextStyle(color:AppColors.fieldColor,),
                     ),
                     SizedBox(height: 20),
                     Text(
                       'Password',
                       style: TextStyle(
-                          color: Colors.white,
+                          color: AppColors.whiteColor,
                           fontSize: AppFontSize.fontSize16),
                     ),
                     SizedBox(height: 5),
@@ -156,13 +157,13 @@ class RegisterScreen extends StatelessWidget {
                         cubit.changePasswordVisibility();
                       },
                       hint: 'Enter your Password',
-                      hintStyle: TextStyle(color: HexColor('535353')),
+                      hintStyle: TextStyle( color: AppColors.fieldColor),
                     ),
                     SizedBox(height: 20),
                     Text(
                       'Confirm Password',
                       style: TextStyle(
-                          color: Colors.white,
+                          color: AppColors.whiteColor,
                           fontSize: AppFontSize.fontSize16),
                     ),
                     SizedBox(height: 5),
@@ -177,13 +178,13 @@ class RegisterScreen extends StatelessWidget {
                         cubit.changePasswordVisibility();
                       },
                       hint: 'Confirm your Password',
-                      hintStyle: TextStyle(color: HexColor('535353')),
+                      hintStyle: TextStyle( color: AppColors.fieldColor,),
                     ),
                     SizedBox(height: 20),
                     Text(
                       'Email',
                       style: TextStyle(
-                          color: Colors.white,
+                          color: AppColors.whiteColor,
                           fontSize: AppFontSize.fontSize16),
                     ),
                     SizedBox(height: 5),
@@ -193,13 +194,13 @@ class RegisterScreen extends StatelessWidget {
                       valid: (value) {},
                       prefix: Icons.email,
                       hint: 'Enter your Email',
-                      hintStyle: TextStyle(color: HexColor('535353')),
+                      hintStyle: TextStyle( color: AppColors.fieldColor,),
                     ),
                     SizedBox(height: 20),
                     Text(
                       'Phone',
                       style: TextStyle(
-                          color: Colors.white,
+                          color: AppColors.whiteColor,
                           fontSize: AppFontSize.fontSize16),
                     ),
                     SizedBox(height: 5),
@@ -209,13 +210,13 @@ class RegisterScreen extends StatelessWidget {
                       valid: (value) {},
                       prefix: Icons.phone,
                       hint: 'Enter your Phone',
-                      hintStyle: TextStyle(color: HexColor('535353')),
+                      hintStyle: TextStyle( color: AppColors.fieldColor,),
                     ),
                     SizedBox(height: 20),
                     Text(
                       'National Id',
                       style: TextStyle(
-                          color: Colors.white,
+                          color: AppColors.whiteColor,
                           fontSize: AppFontSize.fontSize16),
                     ),
                     SizedBox(height: 5),
@@ -225,26 +226,26 @@ class RegisterScreen extends StatelessWidget {
                       valid: (value) {},
                       prefix: Icons.comment_bank_rounded,
                       hint: 'Enter your National',
-                      hintStyle: TextStyle(color: HexColor('535353')),
+                      hintStyle: TextStyle(color: AppColors.fieldColor,),
                     ),
                     SizedBox(height: 60),
-                    state is LoadingLogin
+                    state is LoadingUserRegister
                         ? Center(
                             child: LoadingAnimationWidget.inkDrop(
-                              color: HexColor('8687E7'),
+                              color:AppColors.primeColor,
                               size: 20,
                             ),
                           )
                         : DefaultButton(
                             width: double.infinity,
                             backgroundColor: cubit.isBottonEnable
-                                ? HexColor('8687E7')
-                                : HexColor('8687C7')
+                                ? AppColors.primeColor
+                                : AppColors.secColor
                                     .withValues(blue: 0.5, green: 0.5),
                             borderColor: Colors.transparent,
-                            buttonWidget: const Text(
+                            buttonWidget:  Text(
                               'Register',
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: AppColors.whiteColor),
                             ),
                             function: () {
                               if (formKey.currentState!.validate()) {
@@ -304,20 +305,20 @@ class RegisterScreen extends StatelessWidget {
                       },
                       width: double.infinity,
                       backgroundColor: Colors.transparent,
-                      borderColor: HexColor('8687E7'),
+                      borderColor:AppColors.primeColor,
                       buttonWidget: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
                               FontAwesomeIcons.google,
-                              color: HexColor('8875FF'),
+                              color:AppColors.thirdColor,
                             ),
                             SizedBox(
                               width: 10,
                             ),
                             Text(
-                              'Login with Google',
-                              style: TextStyle(color: Colors.white),
+                              AppString.google,
+                              style: TextStyle(color:AppColors.whiteColor),
                             ),
                           ]),
                     ),
@@ -328,20 +329,20 @@ class RegisterScreen extends StatelessWidget {
                       function: () {},
                       width: double.infinity,
                       backgroundColor: Colors.transparent,
-                      borderColor: HexColor('8687E7'),
+                      borderColor: AppColors.primeColor,
                       buttonWidget: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
                               FontAwesomeIcons.apple,
-                              color: HexColor('8875FF'),
+                              color: AppColors.thirdColor,
                             ),
                             SizedBox(
                               width: 10,
                             ),
                             Text(
-                              'Login with Apple',
-                              style: TextStyle(color: Colors.white),
+                              AppString.apple,
+                              style: TextStyle(color:AppColors.whiteColor),
                             ),
                           ]),
                     ),
@@ -351,15 +352,15 @@ class RegisterScreen extends StatelessWidget {
                         children: [
                           Text(
                             'Already have an account?',
-                            style: TextStyle(color: Colors.grey),
+                            style: TextStyle(color:AppColors.greyColor),
                           ),
                           MaterialButton(
                               onPressed: () {
-                                //  navigateAndReplace(context, Routes.registerRoute);
+                                  navigateAndReplace(context, Routes.loginRoute);
                               },
                               child: Text(
-                                'Login',
-                                style: TextStyle(color: Colors.white),
+                                AppString.login,
+                                style: TextStyle(color:AppColors.whiteColor),
                               ))
                         ],
                       ),

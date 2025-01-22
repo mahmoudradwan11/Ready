@@ -7,6 +7,7 @@ import 'package:ready/core/controllers/register_cubit/register_cubit.dart';
 import 'package:ready/core/mangers/routes.dart';
 import 'package:ready/core/mangers/themes.dart';
 import 'package:ready/core/mangers/values.dart';
+import 'package:ready/screens/screens/home.dart';
 import 'package:ready/screens/screens/splash.dart';
 import 'core/controllers/onboarding_controller/onboarding_cubit.dart';
 import 'core/network/local/cache_helper.dart';
@@ -58,7 +59,7 @@ class MyApp extends StatelessWidget {
         initialRoute: Routes.splashRoute,
         onGenerateRoute: RouteGenerator.getRoutes,
         theme: lightTheme,
-        home: SplashScreen(),
+        home:SplashScreen(),
       ),
     );
   }

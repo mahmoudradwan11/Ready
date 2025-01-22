@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:ready/core/mangers/values.dart';
 import 'colors.dart';
 
@@ -18,13 +19,14 @@ ThemeData lightTheme = ThemeData(
     ),
   ),
   floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: AppColors.defaultColor,
+    backgroundColor: AppColors.secColor,
   ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     type: BottomNavigationBarType.fixed,
-    selectedItemColor: AppColors.defaultColor,
-    elevation: 20.0,
-    backgroundColor: AppColors.defaultColor,
+    selectedItemColor:AppColors.whiteColor,
+    unselectedItemColor: AppColors.greyColor,
+    elevation: 10.0,
+    backgroundColor:HexColor('363636'),
   ),
   scaffoldBackgroundColor: AppColors.defaultColor,
 );
