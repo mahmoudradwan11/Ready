@@ -3,11 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ready/core/controllers/login_cubit/login_cubit.dart';
 import 'package:ready/core/controllers/obs.dart';
+import 'package:ready/core/controllers/ready_controller/ready_cubit.dart';
 import 'package:ready/core/controllers/register_cubit/register_cubit.dart';
+import 'package:ready/core/controllers/user_controller/user_cubit.dart';
 import 'package:ready/core/mangers/routes.dart';
 import 'package:ready/core/mangers/themes.dart';
 import 'package:ready/core/mangers/values.dart';
-import 'package:ready/screens/screens/home.dart';
 import 'package:ready/screens/screens/splash.dart';
 import 'core/controllers/onboarding_controller/onboarding_cubit.dart';
 import 'core/network/local/cache_helper.dart';
@@ -18,8 +19,6 @@ void main() async {
   await CacheHelper.init();
   await DioHelper.init();
   Bloc.observer = MyBlocObserver();
-  board = CacheHelper.getData(key: 'onBoarding');
-  print('Boarding =$board');
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.light,
@@ -29,6 +28,22 @@ void main() async {
   } else {
     nextScreen = Routes.onBoardingRoute;
   }
+  nationalId = CacheHelper.getData(key: 'userId');
+  board = CacheHelper.getData(key: 'onBoarding');
+  token = CacheHelper.getData(key: 'token');
+  print('Token = $token');
+  print('National Id = $nationalId');
+  print('Boarding =$board');
+  if (board != null) {
+    if (token != null) {
+        nextScreen = Routes.homeRoute;
+      } else {
+      nextScreen = Routes.startRoute;
+    }
+  }else{
+    nextScreen=Routes.onBoardingRoute;
+  }
+
   runApp(const MyApp());
 }
 
@@ -51,6 +66,14 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => RegisterCubit()..checkRegisterBotton(),
           lazy: true,
+        ),
+        BlocProvider(
+          create: (context) => UserCubit()..getUserData(),
+          lazy: true,
+        ),
+        BlocProvider(
+          create: (context) => ReadyCubit(),
+          lazy: false,
         ),
       ],
       child: MaterialApp(

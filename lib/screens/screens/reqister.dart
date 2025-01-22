@@ -39,6 +39,7 @@ class RegisterScreen extends StatelessWidget {
           ).then((value) {
             token = state.userModel.user!.token!;
           });
+          navigateAndFinishThisScreen(context,Routes.homeRoute);
         } else {
           print(state.userModel.message);
         }

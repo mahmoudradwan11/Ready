@@ -12,7 +12,7 @@ class Routes {
   static const String loginRoute = '/login';
   static const String registerRoute = '/register';
   static const String forgotPasswordRoute = '/forgotPassword';
-  static const String home = '/home';
+  static const String homeRoute = '/home';
   static const String onBoardingRoute = '/onBoarding';
 }
 
@@ -29,7 +29,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => StartScreen());
       case Routes.registerRoute:
         return MaterialPageRoute(builder: (_) => RegisterScreen());
-      case Routes.home:
+      case Routes.homeRoute:
         return MaterialPageRoute(builder: (_) => HomeScreen());
 
       default:

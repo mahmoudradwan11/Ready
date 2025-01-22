@@ -9,7 +9,6 @@ import 'package:ready/screens/widgets/toast.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitState());
-
   static LoginCubit get(context) => BlocProvider.of(context);
   UserModel? loginModel;
   bool isBottonEnable = false;

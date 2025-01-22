@@ -10,6 +10,7 @@ import 'package:ready/core/mangers/routes.dart';
 import 'package:ready/core/mangers/string.dart';
 import 'package:ready/core/mangers/values.dart';
 import 'package:ready/core/network/local/cache_helper.dart';
+import 'package:ready/screens/screens/home.dart';
 import 'package:ready/screens/widgets/button.dart';
 import 'package:ready/screens/widgets/devider.dart';
 import 'package:ready/screens/widgets/text_form_feild.dart';
@@ -35,6 +36,7 @@ class LoginScreen extends StatelessWidget {
             token = state.model.user!.token;
             showToast('${state.model.message}', ToastStates.SUCCESS);
           });
+          navigateAndFinishThisScreen(context,HomeScreen());
         } else {
           print(state.model.message);
         }
