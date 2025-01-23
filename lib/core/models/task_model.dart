@@ -1,11 +1,22 @@
-class TaskModel{
+import 'package:hive_flutter/hive_flutter.dart';
+part 'task_model.g.dart';
+@HiveType(typeId: 0)
+class TaskModel extends HiveObject{
+  @HiveField(0)
   String? title;
+  @HiveField(1)
   String? subTitle;
+  @HiveField(2)
   String? date;
+  @HiveField(3)
   String? time;
+  @HiveField(4)
   int? priority;
+  @HiveField(5)
   String? category;
+  @HiveField(6)
   int? color;
+  @HiveField(7)
   String? type;
   TaskModel({
     required this.title,
