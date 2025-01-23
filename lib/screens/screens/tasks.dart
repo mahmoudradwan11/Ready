@@ -6,7 +6,9 @@ import 'package:ready/core/controllers/user_controller/user_cubit.dart';
 import 'package:ready/core/controllers/user_controller/user_states.dart';
 import 'package:ready/core/mangers/colors.dart';
 import 'package:ready/core/mangers/images_manger.dart';
+import 'package:ready/core/mangers/values.dart';
 import 'package:ready/screens/widgets/task_item.dart';
+import 'package:svg_flutter/svg.dart';
 
 class TasksScreen extends StatelessWidget {
   const TasksScreen({super.key});
@@ -65,7 +67,19 @@ class TasksScreen extends StatelessWidget {
           TaskCubit cubit =  TaskCubit.get(context);
         return cubit.tasks.isEmpty?
         Center(
-          child: Text('data',style: TextStyle(color:Colors.orangeAccent),),
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 120),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset(AppImages.emptyTask),
+                Text('What do you want to do today?',style: TextStyle(color: AppColors.whiteColor,fontSize: AppFontSize.fontSize20),),
+                SizedBox(height: 10,),
+                Text('Tap + to add your tasks',style: TextStyle(color: AppColors.greyColor),)
+
+              ],
+            ),
+          )
         ):ListView.builder(
             itemBuilder:(context,index)=>buildTaskItem(cubit.tasks[index]),
             itemCount: cubit.tasks.length,
