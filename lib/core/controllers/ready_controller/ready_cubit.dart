@@ -10,3 +10,4 @@ class ReadyCubit extends Cubit<ReadyStates> {
   }
 
 }
+

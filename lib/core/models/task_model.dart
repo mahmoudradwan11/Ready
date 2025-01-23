@@ -15,7 +15,7 @@ class TaskModel extends HiveObject{
   @HiveField(5)
   String? category;
   @HiveField(6)
-  int? color;
+  String ? color;
   @HiveField(7)
   String? type;
   TaskModel({

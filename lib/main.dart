@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:ready/core/controllers/Task_cubit/task_cubit.dart';
 import 'package:ready/core/controllers/login_cubit/login_cubit.dart';
 import 'package:ready/core/controllers/obs.dart';
 import 'package:ready/core/controllers/ready_controller/ready_cubit.dart';
@@ -64,6 +65,10 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => OnboardingCubit(),
           lazy: true,
+        ),
+        BlocProvider(
+          create: (context) => TaskCubit(),
+          lazy: false,
         ),
         BlocProvider(
           create: (context) => LoginCubit()..checkLoginBotton(),

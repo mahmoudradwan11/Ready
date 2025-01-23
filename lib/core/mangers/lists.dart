@@ -40,3 +40,15 @@ List<IconData>icons=[
   Icons.timer,
   Icons.person,
 ];
+final List<Map<String, dynamic>> categories = [
+  {"icon": Icons.local_grocery_store, "label": "Grocery", "color": Colors.green},
+  {"icon": Icons.work, "label": "Work", "color": Colors.orange},
+  {"icon": Icons.fitness_center, "label": "Sport", "color": Colors.cyan},
+  {"icon": Icons.design_services, "label": "Design", "color": Colors.pinkAccent},
+  {"icon": Icons.school, "label": "University", "color": Colors.blue},
+  {"icon": Icons.speaker, "label": "Social", "color": Colors.pink},
+  {"icon": Icons.music_note, "label": "Music", "color": Colors.purple},
+  {"icon": Icons.favorite, "label": "Health", "color": Colors.lightGreen},
+  {"icon": Icons.movie, "label": "Movie", "color": Colors.lightBlue},
+  {"icon": Icons.home, "label": "Home", "color": Colors.orangeAccent},
+];

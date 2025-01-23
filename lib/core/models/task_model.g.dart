@@ -23,7 +23,7 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
       time: fields[3] as String?,
       priority: fields[4] as int?,
       category: fields[5] as String?,
-      color: fields[6] as int?,
+      color: fields[6] as String?,
       type: fields[7] as String?,
     );
   }
