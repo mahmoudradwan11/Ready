@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
           lazy: true,
         ),
         BlocProvider(
-          create: (context) => TaskCubit(),
+          create: (context) => TaskCubit()..getAllTasks(),
           lazy: false,
         ),
         BlocProvider(

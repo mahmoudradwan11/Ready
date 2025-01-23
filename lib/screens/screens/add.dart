@@ -171,7 +171,7 @@ class _AddTasksScreenState extends State<AddTasksScreen> {
                               title:cubit.titleController.text,
                               subTitle: cubit.subtitleController.text,
                               date:cubit.selectedDate.toString(),
-                              time:cubit.selectedTime.toString(),
+                              time:timeToString(cubit.selectedTime!),
                               priority:cubit.selectedPriority,
                               category:categories[cubit.selectedCategory!]['label'],
                               color:'Cyan',

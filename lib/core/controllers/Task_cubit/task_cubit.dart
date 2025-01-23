@@ -299,15 +299,30 @@ class TaskCubit extends Cubit<TaskStates> {
     }
   }
   void addTask(TaskModel task)async{
-    emit(AddTaskIniData());
+    emit(AddTaskInitData());
     try{
     var taskBox = Hive.box<TaskModel>('Tasks');
     await taskBox.add(task);
     emit(AddTaskData());
     showToast('Added',ToastStates.SUCCESS);
+    getAllTasks();
   }catch(error){
       print(error.toString());
       emit(ErrorAddTaskData());
     }
     }
+  List<TaskModel> tasks = [];
+  void getAllTasks()async{
+    emit(GetTaskInitData());
+    try{
+      var taskBox = Hive.box<TaskModel>('Tasks');
+      tasks = taskBox.values.toList();
+      emit(GetTaskData());
+      print(tasks.length);
+    }catch(error){
+      print(error.toString());
+      emit(ErrorGetTaskData());
+    }
+  }
+
 }
