@@ -10,8 +10,8 @@ class TaskCubit extends Cubit<TaskStates> {
   static TaskCubit get(context) => BlocProvider.of(context);
   TextEditingController titleController = TextEditingController();
   TextEditingController subtitleController = TextEditingController();
-  DateTime? selectedDate;
-  TimeOfDay? selectedTime;
+  DateTime? selectedDate = DateTime.now();
+  TimeOfDay? selectedTime = TimeOfDay.now();
   int? selectedCategory;
   String? selectedColor;
   int? selectedPriority;

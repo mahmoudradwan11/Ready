@@ -80,7 +80,7 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => UserCubit()..getUserData(),
-          lazy: true,
+          lazy: false,
         ),
         BlocProvider(
           create: (context) => ReadyCubit(),

@@ -120,8 +120,12 @@ class _AddTasksScreenState extends State<AddTasksScreen> {
                                   if(cubit.selectedTime!=null)
                                       Text(DateFormat('yyyy-MM-dd').format(cubit.selectedDate!),style: TextStyle(color: Colors.grey),),
                                   Text(' At ',style: TextStyle(color: Colors.grey),),
+                                  if(cubit.selectedTime==null)
+                                    Text('0'),
                                   if(cubit.selectedDate!=null)
                                     Text(timeToString(cubit.selectedTime!),style: TextStyle(color: Colors.grey),),
+                                  if(cubit.selectedDate==null)
+                                    Text('0'),
                                   Spacer(),
                                   if(cubit.selectedCategory!=null)
                                   Container(
