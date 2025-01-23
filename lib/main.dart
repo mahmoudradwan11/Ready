@@ -24,7 +24,7 @@ void main() async {
   await DioHelper.init();
   await Hive.initFlutter();
   Hive.registerAdapter(TaskModelAdapter());
-  await Hive.openBox('Tasks');
+  await Hive.openBox<TaskModel>('Tasks');
   Bloc.observer = MyBlocObserver();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,

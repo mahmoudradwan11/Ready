@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ready/core/controllers/Task_cubit/task_states.dart';
 import 'package:ready/core/mangers/colors.dart';
 import 'package:ready/core/mangers/lists.dart';
+import 'package:ready/core/models/task_model.dart';
 import 'package:ready/screens/widgets/button.dart';
+import 'package:ready/screens/widgets/toast.dart';
 
 class TaskCubit extends Cubit<TaskStates> {
   TaskCubit() : super(TaskInitState());
@@ -15,6 +18,7 @@ class TaskCubit extends Cubit<TaskStates> {
   int? selectedCategory;
   String? selectedColor;
   int? selectedPriority;
+  TaskModel? taskModel;
   var pageController = PageController();
   void selectPriority(index, context) {
     showDialog(
@@ -294,4 +298,16 @@ class TaskCubit extends Cubit<TaskStates> {
       print('Date: $selectedDate, Time: $selectedTime');
     }
   }
+  void addTask(TaskModel task)async{
+    emit(AddTaskIniData());
+    try{
+    var taskBox = Hive.box<TaskModel>('Tasks');
+    await taskBox.add(task);
+    emit(AddTaskData());
+    showToast('Added',ToastStates.SUCCESS);
+  }catch(error){
+      print(error.toString());
+      emit(ErrorAddTaskData());
+    }
+    }
 }

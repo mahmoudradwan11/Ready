@@ -9,6 +9,8 @@ import 'package:ready/core/mangers/convert.dart';
 import 'package:ready/core/mangers/lists.dart';
 import 'package:ready/core/mangers/lottie.dart';
 import 'package:ready/core/mangers/values.dart';
+import 'package:ready/core/models/task_model.dart';
+import 'package:ready/screens/widgets/button.dart';
 import 'package:ready/screens/widgets/text_form_feild.dart';
 
 class AddTasksScreen extends StatefulWidget {
@@ -93,7 +95,7 @@ class _AddTasksScreenState extends State<AddTasksScreen> {
                   Text('Selected Proirty'),
                   Text('Selected Category'),
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text('Task Details',style: TextStyle(color: AppColors.primeColor,fontSize: AppFontSize.fontSize20),),
                       Padding(
@@ -161,6 +163,24 @@ class _AddTasksScreenState extends State<AddTasksScreen> {
                         ),
                         ),
                         ),
+                      Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.all(100.0),
+                        child: DefaultButton(buttonWidget: Text('AddTask'), function:(){
+                          cubit.addTask(TaskModel(
+                              title:cubit.titleController.text,
+                              subTitle: cubit.subtitleController.text,
+                              date:cubit.selectedDate.toString(),
+                              time:cubit.selectedTime.toString(),
+                              priority:cubit.selectedPriority,
+                              category:categories[cubit.selectedCategory!]['label'],
+                              color:'Cyan',
+                              type:'Active'
+                          ));
+                        },
+                          backgroundColor: AppColors.primeColor,
+                        ),
+                      )
                     ],
                   ),
                 ]),

@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ready/core/controllers/user_controller/user_cubit.dart';
 import 'package:ready/core/controllers/user_controller/user_states.dart';
+import 'package:ready/core/mangers/colors.dart';
 import 'package:ready/core/mangers/images_manger.dart';
 
-import '../../core/mangers/colors.dart';
-
 class TasksScreen extends StatelessWidget {
-  const TasksScreen({Key? key}) : super(key: key);
+  const TasksScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +33,7 @@ class TasksScreen extends StatelessWidget {
                           image: DecorationImage(
                             image: NetworkImage(
                                 AppImages.userNotImage),
-                            fit: BoxFit.cover,
+                            fit: BoxFit.fill,
                           ),
                         ),
                       ),
