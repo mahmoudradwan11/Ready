@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:ready/core/controllers/login_cubit/login_cubit.dart';
 import 'package:ready/core/controllers/obs.dart';
 import 'package:ready/core/controllers/ready_controller/ready_cubit.dart';
@@ -18,6 +20,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
   await DioHelper.init();
+  await Hive.initFlutter();
+  await Hive.openBox('Tasks');
   Bloc.observer = MyBlocObserver();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
