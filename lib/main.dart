@@ -11,6 +11,7 @@ import 'package:ready/core/controllers/user_controller/user_cubit.dart';
 import 'package:ready/core/mangers/routes.dart';
 import 'package:ready/core/mangers/themes.dart';
 import 'package:ready/core/mangers/values.dart';
+import 'package:ready/core/models/task_model.dart';
 import 'package:ready/screens/screens/splash.dart';
 import 'core/controllers/onboarding_controller/onboarding_cubit.dart';
 import 'core/network/local/cache_helper.dart';
@@ -21,6 +22,7 @@ void main() async {
   await CacheHelper.init();
   await DioHelper.init();
   await Hive.initFlutter();
+  Hive.registerAdapter(TaskModelAdapter());
   await Hive.openBox('Tasks');
   Bloc.observer = MyBlocObserver();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
