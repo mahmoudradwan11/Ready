@@ -174,7 +174,7 @@ class _AddTasksScreenState extends State<AddTasksScreen> {
                               time:timeToString(cubit.selectedTime!),
                               priority:cubit.selectedPriority,
                               category:categories[cubit.selectedCategory!]['label'],
-                              color:'Cyan',
+                              color:'green',
                               type:'Active'
                           ));
                         },

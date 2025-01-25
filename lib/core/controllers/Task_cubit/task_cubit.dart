@@ -175,10 +175,10 @@ class TaskCubit extends Cubit<TaskStates> {
                           }
                           if(selectedCategory==3){
                             selectedColor = 'pinkAccent';
+
                           }
                           if(selectedCategory==4){
                             selectedColor ='blue';
-                            ;
                           }
                           if(selectedCategory==5){
                             selectedColor = 'pink';
@@ -188,12 +188,14 @@ class TaskCubit extends Cubit<TaskStates> {
                           }
                           if(selectedCategory==7){
                             selectedColor = 'lightGreen';
+
                           }
                           if(selectedCategory==8){
                             selectedColor = 'lightBlue';
                           }
                           if(selectedCategory==9){
                             selectedColor = 'orangeAccent';
+
                           }
                         },
                         child: Column(

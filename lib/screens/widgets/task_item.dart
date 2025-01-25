@@ -33,13 +33,75 @@ Widget buildTaskItem(TaskModel model)=> Padding(
               if(model.date!=null)
                 Text(model.time!,style: TextStyle(color: Colors.grey),),
               Spacer(),
-              if(model.category!=null)
+              if(model.category!=null&&model.category=='Grocery')
                 Container(
-                  color: Colors.cyan,
+                  color:Colors.green,
                   height: 20,
                   width: 100,
                   child: Center(child: Text(model.category!)),
-
+                ),
+              if(model.category!=null&&model.category=='Work')
+                Container(
+                  color:Colors.orangeAccent,
+                  height: 20,
+                  width: 100,
+                  child: Center(child: Text(model.category!)),
+                ),
+              if(model.category!=null&&model.category=='Sport')
+                Container(
+                  color:Colors.cyan,
+                  height: 20,
+                  width: 100,
+                  child: Center(child: Text(model.category!)),
+                ),
+              if(model.category!=null&&model.category=='Design')
+                Container(
+                  color:Colors.pinkAccent,
+                  height: 20,
+                  width: 100,
+                  child: Center(child: Text(model.category!)),
+                ),
+              if(model.category!=null&&model.category=='University')
+                Container(
+                  color:Colors.blue,
+                  height: 20,
+                  width: 100,
+                  child: Center(child: Text(model.category!)),
+                ),
+              if(model.category!=null&&model.category=='Social')
+                Container(
+                  color:Colors.pink,
+                  height: 20,
+                  width: 100,
+                  child: Center(child: Text(model.category!)),
+                ),
+              if(model.category!=null&&model.category=='Music')
+                Container(
+                  color:Colors.purple,
+                  height: 20,
+                  width: 100,
+                  child: Center(child: Text(model.category!)),
+                ),
+              if(model.category!=null&&model.category=='Health')
+                Container(
+                  color:Colors.lightGreen,
+                  height: 20,
+                  width: 100,
+                  child: Center(child: Text(model.category!)),
+                ),
+              if(model.category!=null&&model.category=='Movie')
+                Container(
+                  color:Colors.lightBlue,
+                  height: 20,
+                  width: 100,
+                  child: Center(child: Text(model.category!)),
+                ),
+              if(model.category!=null&&model.category=='Home')
+                Container(
+                  color:Colors.orangeAccent,
+                  height: 20,
+                  width: 100,
+                  child: Center(child: Text(model.category!)),
                 ),
               SizedBox(
                 width: 10,
