@@ -175,7 +175,7 @@ class _AddTasksScreenState extends State<AddTasksScreen> {
                               priority:cubit.selectedPriority,
                               category:categories[cubit.selectedCategory!]['label'],
                               color:'green',
-                              type:'Active'
+                              type:cubit.getTaskState(cubit.selectedDate!),
                           ));
                         },
                           backgroundColor: AppColors.primeColor,
@@ -188,3 +188,4 @@ class _AddTasksScreenState extends State<AddTasksScreen> {
         });
   }
 }
+

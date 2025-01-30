@@ -91,10 +91,10 @@ class TasksScreen extends StatelessWidget {
                   ),
                 ))
               : Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(bottom:80),
                 child: ListView.builder(
                     itemBuilder: (context, index) =>
-                        buildTaskItem(cubit.tasks[index]),
+                        buildTaskItem(cubit.tasks[index],context),
                     itemCount: cubit.tasks.length,
                   ),
               );

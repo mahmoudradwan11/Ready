@@ -19,6 +19,7 @@ class TaskCubit extends Cubit<TaskStates> {
   String? selectedColor;
   int? selectedPriority;
   TaskModel? taskModel;
+  String? taskType;
   var pageController = PageController();
   void selectPriority(index, context) {
     showDialog(
@@ -326,5 +327,8 @@ class TaskCubit extends Cubit<TaskStates> {
       emit(ErrorGetTaskData());
     }
   }
-
+  String getTaskState(DateTime orderDate) {
+    int diff = orderDate.difference(DateTime.now()).inDays;
+    return diff < 0 ? "Complete" : (diff == 0 ? "Pending" : "Active");
+  }
 }
