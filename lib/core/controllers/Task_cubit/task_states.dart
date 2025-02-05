@@ -10,6 +10,8 @@ class AddTaskInitData extends TaskStates{}
 class GetTaskData extends TaskStates{}
 class ErrorGetTaskData extends TaskStates{}
 class GetTaskInitData extends TaskStates{}
+class ChangeCate extends TaskStates{}
+
 
 
 

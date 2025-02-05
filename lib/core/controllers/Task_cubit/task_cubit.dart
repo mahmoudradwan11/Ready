@@ -315,20 +315,44 @@ class TaskCubit extends Cubit<TaskStates> {
     }
     }
   List<TaskModel> tasks = [];
+  List<TaskModel> completeTasks = [];
+  List<TaskModel> pendingTasks = [];
+  List<TaskModel> activeTasks = [];
   void getAllTasks()async{
     emit(GetTaskInitData());
     try{
       var taskBox = Hive.box<TaskModel>('Tasks');
       tasks = taskBox.values.toList();
+      filterTasks();
       emit(GetTaskData());
       print(tasks.length);
+      print(completeTasks.length);
+      print(pendingTasks.length);
+      print(activeTasks.length);
     }catch(error){
       print(error.toString());
       emit(ErrorGetTaskData());
     }
   }
-  String getTaskState(DateTime orderDate) {
+  String getTaskState(DateTime orderDate){
     int diff = orderDate.difference(DateTime.now()).inDays;
     return diff < 0 ? "Complete" : (diff == 0 ? "Pending" : "Active");
   }
+  void filterTasks(){
+    completeTasks = tasks.where((task)=>task.type=='Complete').toList();
+    pendingTasks = tasks.where((task)=>task.type=='Pending').toList();
+    activeTasks = tasks.where((task)=>task.type=='Active').toList();
+  }
+  bool today = true;
+  void changeCateToComplete(){
+    today = false;
+    emit(ChangeCate());
+  }
+  void changeCateToToday(){
+    today = true;
+    emit(ChangeCate());
+  }
+
+
 }
+
