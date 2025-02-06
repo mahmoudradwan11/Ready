@@ -7,10 +7,10 @@ ThemeData lightTheme = ThemeData(
   useMaterial3: false,
   appBarTheme: AppBarTheme(
     titleSpacing: 20.0,
-    backgroundColor: AppColors.whiteColor,
+    backgroundColor: AppColors.defaultColor,
     elevation: 0.0,
     titleTextStyle: TextStyle(
-      color: AppColors.defaultColor,
+      color: AppColors.whiteColor,
       fontSize: 20.0,
       fontWeight: AppFontWeight.font500,
     ),
