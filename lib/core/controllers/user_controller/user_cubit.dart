@@ -23,5 +23,23 @@ class UserCubit extends Cubit<UserStates> {
       emit(ErrorGetUserDataState());
     });
   }
-  
+   void editProfile(name,email,phone,){
+    emit(LoadingGetUserDataState());
+     DioHelper.putData(url: ApiConstants.editProfile, data: {
+       "token": token,
+       "name": name,
+       "email": email,
+       "phone": phone,
+       "password": "12345678",
+       "gender": 'male',
+     }).then((value) {
+       userModel = UserModel.fromJson(value.data);
+       print(userModel!.user!.name!);
+       getUserData();
+       emit(EditUserDataState());
+     }).catchError((error) {
+       print(error.toString());
+       emit(ErrorEditUserDataState());
+     });
+   }
 }

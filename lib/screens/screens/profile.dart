@@ -8,7 +8,9 @@ import 'package:ready/core/controllers/user_controller/user_cubit.dart';
 import 'package:ready/core/controllers/user_controller/user_states.dart';
 import 'package:ready/core/mangers/colors.dart';
 import 'package:ready/core/mangers/values.dart';
+import 'package:ready/screens/widgets/button.dart';
 import 'package:ready/screens/widgets/profile.dart';
+import 'package:ready/screens/widgets/text_form_feild.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -19,6 +21,13 @@ class ProfileScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         UserCubit cubit = UserCubit.get(context);
+        var nameController = TextEditingController();
+        var emailController = TextEditingController();
+        var phoneController = TextEditingController();
+        var model = cubit.userModel;
+        nameController.text = model!.user!.name!;
+        emailController.text = model.user!.email!;
+        phoneController.text = model.user!.phone!;
         return Scaffold(
           appBar: AppBar(
             backgroundColor: AppColors.defaultColor,
@@ -107,21 +116,213 @@ class ProfileScreen extends StatelessWidget {
                     child: Text('Account',style: TextStyle(color: AppColors.greyColor),),
                   ),
                   InkWell(
-                    onTap:(){},
+                    onTap:(){
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return Dialog(
+                              backgroundColor: HexColor('363636'),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                  'Change account name',
+                                      style: TextStyle(
+                                        fontSize: AppFontSize.fontSize15,
+                                        color: AppColors.whiteColor,
+                                      ),
+                                    ),
+                                    SizedBox(height:2),
+                                    Container(height: 1,color: AppColors.greyColor,),
+                                    SizedBox(height:10),
+                                    DefaultFieldForm(
+                                      controller: nameController,
+                                      keyboard: TextInputType.name,
+                                      valid: (value) {},
+                                      prefix: Icons.person,
+                                      hintStyle: const TextStyle(color: Colors.grey),
+                                      labelStyle: TextStyle(color:AppColors.greyColor
+                                    ),
+                                    ),
+                                    SizedBox(height: 16),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        DefaultButton(
+                                          width: 120,
+                                            backgroundColor: Colors.transparent,
+                                            borderColor: AppColors.greyColor,
+                                            buttonWidget: Text(
+                                              "Cancel",
+                                              style: TextStyle(color: AppColors.primeColor),
+                                            ),
+                                            function: () {
+                                            Navigator.pop(context);
+                                            }),
+                                        DefaultButton(
+                                            width: 120,
+                                            backgroundColor: AppColors.primeColor,
+                                            buttonWidget: Text(
+                                              "Edit",
+                                              style: TextStyle(color: AppColors.whiteColor),
+                                            ),
+                                            function: () {})
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          });
+                    },
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: buildProfileItem('Change account name',Icons.person)
                     ),
                   ),
                   InkWell(
-                    onTap:(){},
+                    onTap:(){
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return Dialog(
+                              backgroundColor: HexColor('363636'),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Change account password',
+                                      style: TextStyle(
+                                        fontSize: AppFontSize.fontSize15,
+                                        color: AppColors.whiteColor,
+                                      ),
+                                    ),
+                                    SizedBox(height:2),
+                                    Container(height: 1,color: AppColors.greyColor,),
+                                    SizedBox(height:10),
+                                    DefaultFieldForm(
+                                      controller: phoneController,
+                                      keyboard: TextInputType.name,
+                                      valid: (value) {},
+                                      prefix: Icons.person,
+                                      hintStyle: const TextStyle(color: Colors.grey),
+                                      labelStyle: TextStyle(color:AppColors.greyColor
+                                      ),
+                                    ),
+                                    SizedBox(height: 16),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        DefaultButton(
+                                            width: 120,
+                                            backgroundColor: Colors.transparent,
+                                            borderColor: AppColors.greyColor,
+                                            buttonWidget: Text(
+                                              "Cancel",
+                                              style: TextStyle(color: AppColors.primeColor),
+                                            ),
+                                            function: () {
+                                              Navigator.pop(context);
+                                            }),
+                                        DefaultButton(
+                                            width: 120,
+                                            backgroundColor: AppColors.primeColor,
+                                            buttonWidget: Text(
+                                              "Edit",
+                                              style: TextStyle(color: AppColors.whiteColor),
+                                            ),
+                                            function: () {})
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          });
+                    },
                     child: Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: buildProfileItem('Change account password',Icons.key)
                     ),
                   ),
                   InkWell(
-                    onTap:(){},
+                    onTap:(){
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return Dialog(
+                              backgroundColor: HexColor('363636'),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Change account email',
+                                      style: TextStyle(
+                                        fontSize: AppFontSize.fontSize15,
+                                        color: AppColors.whiteColor,
+                                      ),
+                                    ),
+                                    SizedBox(height:2),
+                                    Container(height: 1,color: AppColors.greyColor,),
+                                    SizedBox(height:10),
+                                    DefaultFieldForm(
+                                      controller: emailController,
+                                      keyboard: TextInputType.emailAddress,
+                                      valid: (value) {},
+                                      prefix: Icons.person,
+                                      hintStyle: const TextStyle(color: Colors.grey),
+                                      labelStyle: TextStyle(color:AppColors.greyColor
+                                      ),
+                                    ),
+                                    SizedBox(height: 16),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        DefaultButton(
+                                            width: 120,
+                                            backgroundColor: Colors.transparent,
+                                            borderColor: AppColors.greyColor,
+                                            buttonWidget: Text(
+                                              "Cancel",
+                                              style: TextStyle(color: AppColors.primeColor),
+                                            ),
+                                            function: () {
+                                              Navigator.pop(context);
+                                            }),
+                                        DefaultButton(
+                                            width: 120,
+                                            backgroundColor: AppColors.primeColor,
+                                            buttonWidget: Text(
+                                              "Edit",
+                                              style: TextStyle(color: AppColors.whiteColor),
+                                            ),
+                                            function: () {})
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          });
+                    },
                     child: Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: buildProfileItem('Change account email',Icons.email)
