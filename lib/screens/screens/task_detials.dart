@@ -22,7 +22,9 @@ class TaskDetials extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             backgroundColor: AppColors.defaultColor,
-            leading: IconButton(onPressed:(){}, icon:Icon(Icons.close,color: AppColors.whiteColor,)),
+            leading: IconButton(onPressed:(){
+              Navigator.pop(context);
+            }, icon:Icon(Icons.close,color: AppColors.whiteColor,)),
           ),
           body: Padding(
             padding: const EdgeInsets.all(10.0),

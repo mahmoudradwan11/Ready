@@ -12,11 +12,14 @@ Widget buildTaskItem(TaskModel model,context)=> GestureDetector(
     navigateToNextScreen(context,TaskDetials(taskModel: model));
   },
   child: Padding(
-    padding: const EdgeInsets.all(8.0),
+    padding: const EdgeInsets.all(10.0),
     child: Container(
+      decoration: BoxDecoration(
+        color: AppColors.fieldColor,
+         borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
       height:100,
       width: double.infinity,
-      color: AppColors.fieldColor,
       child:Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(

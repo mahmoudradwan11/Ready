@@ -73,8 +73,8 @@ class SliderRight extends PageRouteBuilder {
               var tween = Tween(begin: begin, end: end);
               var curvesAnimated =
                   CurvedAnimation(parent: animation, curve: Curves.linear);
-              return RotationTransition(
-                turns: tween.animate(curvesAnimated),
+              return ScaleTransition(
+                scale: tween.animate(curvesAnimated),
                 child: child,
               );
             });

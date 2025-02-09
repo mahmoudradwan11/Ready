@@ -1,7 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hive/hive.dart';
+import 'package:quickalert/models/quickalert_type.dart';
+import 'package:quickalert/widgets/quickalert_dialog.dart';
 import 'package:ready/core/controllers/Task_cubit/task_cubit.dart';
 import 'package:ready/core/controllers/Task_cubit/task_states.dart';
 import 'package:ready/core/controllers/user_controller/user_cubit.dart';
@@ -11,10 +14,10 @@ import 'package:ready/core/mangers/values.dart';
 import 'package:ready/screens/widgets/button.dart';
 import 'package:ready/screens/widgets/profile.dart';
 import 'package:ready/screens/widgets/text_form_feild.dart';
+import 'package:slide_action/slide_action.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<UserCubit, UserStates>(
@@ -22,11 +25,10 @@ class ProfileScreen extends StatelessWidget {
       builder: (context, state) {
         UserCubit cubit = UserCubit.get(context);
         var nameController = TextEditingController();
-        var emailController = TextEditingController();
+        var passwordController = TextEditingController();
         var phoneController = TextEditingController();
         var model = cubit.userModel;
         nameController.text = model!.user!.name!;
-        emailController.text = model.user!.email!;
         phoneController.text = model.user!.phone!;
         return Scaffold(
           appBar: AppBar(
@@ -45,10 +47,13 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   Center(
                     child: CircleAvatar(
-                      radius: 50,
-                      backgroundImage:
-                          NetworkImage(cubit.userModel!.user!.profileImage!),
-                    ),
+                        radius: 50,
+                        backgroundImage: cubit.userModel!.user!.profileImage ==
+                                null
+                            ? const NetworkImage(
+                                'https://th.bing.com/th/id/OIP.bbEC4zuJyYZq2FwlY1w1kAHaHa?pid=ImgDet&rs=1')
+                            : NetworkImage(
+                                cubit.userModel!.user!.profileImage!)),
                   ),
                   SizedBox(
                     height: 10,
@@ -101,9 +106,9 @@ class ProfileScreen extends StatelessWidget {
                                 ),
                                 child: Center(
                                     child: Text(
-                                        '${taskCubit.completeTasks.length} Tasks done',
-                                      style: TextStyle(color: AppColors.whiteColor),
-                                    )),
+                                  '${taskCubit.completeTasks.length} Tasks done',
+                                  style: TextStyle(color: AppColors.whiteColor),
+                                )),
                               );
                             },
                           ),
@@ -112,11 +117,14 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 20.0,right: 20.0),
-                    child: Text('Account',style: TextStyle(color: AppColors.greyColor),),
+                    padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                    child: Text(
+                      'Account',
+                      style: TextStyle(color: AppColors.greyColor),
+                    ),
                   ),
                   InkWell(
-                    onTap:(){
+                    onTap: () {
                       showDialog(
                           context: context,
                           builder: (context) {
@@ -132,47 +140,59 @@ class ProfileScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Text(
-                                  'Change account name',
+                                      'Change account name',
                                       style: TextStyle(
                                         fontSize: AppFontSize.fontSize15,
                                         color: AppColors.whiteColor,
                                       ),
                                     ),
-                                    SizedBox(height:2),
-                                    Container(height: 1,color: AppColors.greyColor,),
-                                    SizedBox(height:10),
+                                    SizedBox(height: 2),
+                                    Container(
+                                      height: 1,
+                                      color: AppColors.greyColor,
+                                    ),
+                                    SizedBox(height: 10),
                                     DefaultFieldForm(
                                       controller: nameController,
                                       keyboard: TextInputType.name,
                                       valid: (value) {},
                                       prefix: Icons.person,
-                                      hintStyle: const TextStyle(color: Colors.grey),
-                                      labelStyle: TextStyle(color:AppColors.greyColor
-                                    ),
+                                      hintStyle:
+                                          const TextStyle(color: Colors.grey),
+                                      labelStyle:
+                                          TextStyle(color: AppColors.greyColor),
                                     ),
                                     SizedBox(height: 16),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         DefaultButton(
-                                          width: 120,
+                                            width: 120,
                                             backgroundColor: Colors.transparent,
                                             borderColor: AppColors.greyColor,
                                             buttonWidget: Text(
                                               "Cancel",
-                                              style: TextStyle(color: AppColors.primeColor),
+                                              style: TextStyle(
+                                                  color: AppColors.primeColor),
                                             ),
                                             function: () {
-                                            Navigator.pop(context);
+                                              Navigator.pop(context);
                                             }),
                                         DefaultButton(
                                             width: 120,
-                                            backgroundColor: AppColors.primeColor,
+                                            backgroundColor:
+                                                AppColors.primeColor,
                                             buttonWidget: Text(
                                               "Edit",
-                                              style: TextStyle(color: AppColors.whiteColor),
+                                              style: TextStyle(
+                                                  color: AppColors.whiteColor),
                                             ),
-                                            function: () {})
+                                            function: () {
+                                              cubit.editProfile(
+                                                  nameController.text,
+                                                  phoneController.text);
+                                            })
                                       ],
                                     ),
                                   ],
@@ -182,12 +202,12 @@ class ProfileScreen extends StatelessWidget {
                           });
                     },
                     child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: buildProfileItem('Change account name',Icons.person)
-                    ),
+                        padding: const EdgeInsets.all(20.0),
+                        child: buildProfileItem(
+                            'Change account name', Icons.person)),
                   ),
                   InkWell(
-                    onTap:(){
+                    onTap: () {
                       showDialog(
                           context: context,
                           builder: (context) {
@@ -209,21 +229,41 @@ class ProfileScreen extends StatelessWidget {
                                         color: AppColors.whiteColor,
                                       ),
                                     ),
-                                    SizedBox(height:2),
-                                    Container(height: 1,color: AppColors.greyColor,),
-                                    SizedBox(height:10),
-                                    DefaultFieldForm(
-                                      controller: phoneController,
-                                      keyboard: TextInputType.name,
-                                      valid: (value) {},
-                                      prefix: Icons.person,
-                                      hintStyle: const TextStyle(color: Colors.grey),
-                                      labelStyle: TextStyle(color:AppColors.greyColor
+                                    SizedBox(height: 2),
+                                    Container(
+                                      height: 1,
+                                      color: AppColors.greyColor,
+                                    ),
+                                    SizedBox(height: 16),
+                                    Align(
+                                      alignment: AlignmentDirectional.topStart,
+                                      child: Text(
+                                        'Enter New Password',
+                                        style: TextStyle(
+                                          fontSize: AppFontSize.fontSize15,
+                                          color: AppColors.whiteColor,
+                                        ),
                                       ),
+                                    ),
+                                    DefaultFieldForm(
+                                      controller: passwordController,
+                                      keyboard: TextInputType.visiblePassword,
+                                      valid: (value) {},
+                                      prefix: Icons.password,
+                                      show: cubit.isPassword,
+                                      suffix: cubit.suffix,
+                                      suffixPress: () {
+                                        cubit.changePasswordVisibility();
+                                      },
+                                      hintStyle:
+                                          const TextStyle(color: Colors.grey),
+                                      labelStyle:
+                                          TextStyle(color: AppColors.greyColor),
                                     ),
                                     SizedBox(height: 16),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         DefaultButton(
                                             width: 120,
@@ -231,19 +271,26 @@ class ProfileScreen extends StatelessWidget {
                                             borderColor: AppColors.greyColor,
                                             buttonWidget: Text(
                                               "Cancel",
-                                              style: TextStyle(color: AppColors.primeColor),
+                                              style: TextStyle(
+                                                  color: AppColors.primeColor),
                                             ),
                                             function: () {
                                               Navigator.pop(context);
                                             }),
                                         DefaultButton(
                                             width: 120,
-                                            backgroundColor: AppColors.primeColor,
+                                            backgroundColor:
+                                                AppColors.primeColor,
                                             buttonWidget: Text(
                                               "Edit",
-                                              style: TextStyle(color: AppColors.whiteColor),
+                                              style: TextStyle(
+                                                  color: AppColors.whiteColor),
                                             ),
-                                            function: () {})
+                                            function: () {
+                                              cubit.resetPassword(
+                                                  passwordController.text);
+                                              Navigator.pop(context);
+                                            })
                                       ],
                                     ),
                                   ],
@@ -254,11 +301,11 @@ class ProfileScreen extends StatelessWidget {
                     },
                     child: Padding(
                         padding: const EdgeInsets.all(20.0),
-                        child: buildProfileItem('Change account password',Icons.key)
-                    ),
+                        child: buildProfileItem(
+                            'Change account password', Icons.key)),
                   ),
                   InkWell(
-                    onTap:(){
+                    onTap: () {
                       showDialog(
                           context: context,
                           builder: (context) {
@@ -274,27 +321,32 @@ class ProfileScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Text(
-                                      'Change account email',
+                                      'Change account phone',
                                       style: TextStyle(
                                         fontSize: AppFontSize.fontSize15,
                                         color: AppColors.whiteColor,
                                       ),
                                     ),
-                                    SizedBox(height:2),
-                                    Container(height: 1,color: AppColors.greyColor,),
-                                    SizedBox(height:10),
+                                    SizedBox(height: 2),
+                                    Container(
+                                      height: 1,
+                                      color: AppColors.greyColor,
+                                    ),
+                                    SizedBox(height: 10),
                                     DefaultFieldForm(
-                                      controller: emailController,
+                                      controller: phoneController,
                                       keyboard: TextInputType.emailAddress,
                                       valid: (value) {},
                                       prefix: Icons.person,
-                                      hintStyle: const TextStyle(color: Colors.grey),
-                                      labelStyle: TextStyle(color:AppColors.greyColor
-                                      ),
+                                      hintStyle:
+                                          const TextStyle(color: Colors.grey),
+                                      labelStyle:
+                                          TextStyle(color: AppColors.greyColor),
                                     ),
                                     SizedBox(height: 16),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         DefaultButton(
                                             width: 120,
@@ -302,19 +354,26 @@ class ProfileScreen extends StatelessWidget {
                                             borderColor: AppColors.greyColor,
                                             buttonWidget: Text(
                                               "Cancel",
-                                              style: TextStyle(color: AppColors.primeColor),
+                                              style: TextStyle(
+                                                  color: AppColors.primeColor),
                                             ),
                                             function: () {
                                               Navigator.pop(context);
                                             }),
                                         DefaultButton(
                                             width: 120,
-                                            backgroundColor: AppColors.primeColor,
+                                            backgroundColor:
+                                                AppColors.primeColor,
                                             buttonWidget: Text(
                                               "Edit",
-                                              style: TextStyle(color: AppColors.whiteColor),
+                                              style: TextStyle(
+                                                  color: AppColors.whiteColor),
                                             ),
-                                            function: () {})
+                                            function: () {
+                                              cubit.editProfile(
+                                                  nameController.text,
+                                                  phoneController.text);
+                                            })
                                       ],
                                     ),
                                   ],
@@ -325,35 +384,56 @@ class ProfileScreen extends StatelessWidget {
                     },
                     child: Padding(
                         padding: const EdgeInsets.all(20.0),
-                        child: buildProfileItem('Change account email',Icons.email)
+                        child: buildProfileItem(
+                            'Change account phone', Icons.phone)),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                    child: Text(
+                      'Uptodo',
+                      style: TextStyle(color: AppColors.greyColor),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {},
+                    child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: buildProfileItem(
+                            'About Us', Icons.account_tree_outlined)),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 20.0),
+                    child: InkWell(
+                      onTap: () {},
+                      child: Padding(
+                          padding:
+                              const EdgeInsets.only(left: 20.0, bottom: 20.0),
+                          child: buildProfileItem('FAQ', Icons.question_mark)),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 20.0,right: 20.0),
-                    child: Text('Uptodo',style: TextStyle(color: AppColors.greyColor),),
-                  ),
-                  InkWell(
-                    onTap:(){},
-                    child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: buildProfileItem('About Us',Icons.account_tree_outlined)
+                    padding: const EdgeInsets.only(right: 20.0),
+                    child: InkWell(
+                      onTap: () {},
+                      child: Padding(
+                          padding: const EdgeInsets.only(left: 20.0),
+                          child: buildProfileItem(
+                              'Help and Feedback', Icons.help)),
                     ),
                   ),
-                  InkWell(
-                    onTap:(){},
-                    child: Padding(
-                        padding: const EdgeInsets.only(left: 20.0,bottom: 20.0),
-                        child: buildProfileItem('FAQ',Icons.question_mark)
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: DefaultButton(buttonWidget:Row(
+                      children: [
+                        Icon(Icons.logout,color: Colors.red,),
+                        SizedBox(width: 5,),
+                        Text('Sigout',style: TextStyle(color:Colors.red),)
+                      ],
                     ),
+                        function:(){
+                      cubit.userLayout(context);
+                    }),
                   ),
-                  InkWell(
-                    onTap:(){},
-                    child: Padding(
-                        padding: const EdgeInsets.only(left: 20.0),
-                        child: buildProfileItem('Help and Feedback',Icons.help)
-                    ),
-                  ),
-
                 ],
               ),
             ),
