@@ -5,7 +5,9 @@ import 'package:ready/core/controllers/Task_cubit/task_cubit.dart';
 import 'package:ready/core/controllers/Task_cubit/task_states.dart';
 import 'package:ready/core/mangers/colors.dart';
 import 'package:ready/core/mangers/convert.dart';
+import 'package:ready/core/mangers/routes.dart';
 import 'package:ready/core/models/task_model.dart';
+import 'package:ready/screens/screens/edit.dart';
 import 'package:ready/screens/widgets/button.dart';
 import 'package:ready/screens/widgets/task_details_item.dart';
 import 'package:ready/screens/widgets/toast.dart';
@@ -103,18 +105,21 @@ class TaskDetials extends StatelessWidget {
                   cubit.getAllTasks();
                     }),
                 Spacer(),
-            DefaultButton(
-              radius: 5,
-              isUpperCase: true,
-              width: double.infinity,
-              buttonWidget: Text(
-                'Edit Task',
-                style: TextStyle(color:AppColors.whiteColor),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: DefaultButton(
+                radius: 5,
+                isUpperCase: true,
+                width: double.infinity,
+                buttonWidget: Text(
+                  'Edit Task',
+                  style: TextStyle(color:AppColors.whiteColor),
+                ),
+                function: () {
+                  navigateToNextScreen(context, EditTasks(taskModel:taskModel!));
+                },
+                backgroundColor:AppColors.thirdColor,
               ),
-              function: () {
-               // navigateAndReplace(context, Routes.loginRoute);
-              },
-              backgroundColor:AppColors.thirdColor,
             ),
               ],
             ),
